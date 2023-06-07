@@ -37,6 +37,16 @@ app.get('/cars', cors(corsOptions), async(req, res) =>{
 
 })
 
+//ex#4
+
+app.post('/cars/', cors(corsOptions), async(req, res) =>{
+    const {model, make, color, price} = req.body;
+    const [result] = await pool.execute('INSERT INTO car (model, make, color, price) values (?, ?, ?, ?)',  
+    [model, make, color, price]);
+    //res.status(200).json({message: "new car inserted"})
+    res.send(result)
+})
+
 
 app.listen(PORT, () => {
     console.log(`Express web API running on port: ${PORT}.`)
