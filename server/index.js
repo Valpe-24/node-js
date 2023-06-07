@@ -19,12 +19,13 @@ app.get('/message', cors(corsOptions), async(req, res) => {
 
 //ex#2
 
-// app.get('/cars/:id', cors(corsOptions), async(req, res) =>{
-    //const result = await pool.query('SELECT * FROM cars)
+app.get('/cars/:id', cors(corsOptions), async(req, res) =>{
+    let car_id = req.params['id']
+    const [result] = await pool.query('SELECT * FROM car where car_id = ?',[car_id])
     // const body = result[0]
-    // res.send(body)
+    res.send(result)
 
-// }
+})
 
 
 app.listen(PORT, () => {
