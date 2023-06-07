@@ -27,6 +27,16 @@ app.get('/cars/:id', cors(corsOptions), async(req, res) =>{
 
 })
 
+//ex#3
+
+app.get('/cars', cors(corsOptions), async(req, res) =>{
+    let make = req.query['make']
+    const [result] = await pool.query('SELECT * FROM car where make = ?',[make])
+   
+    res.send(result)
+
+})
+
 
 app.listen(PORT, () => {
     console.log(`Express web API running on port: ${PORT}.`)
