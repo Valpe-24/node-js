@@ -47,6 +47,16 @@ app.post('/cars/', cors(corsOptions), async(req, res) =>{
     res.send(result)
 })
 
+//ex#5
+
+app.put('/cars/', cors(corsOptions), async(req, res) =>{
+    const {car_id, model, make, color, price} = req.body;
+    const result = await pool.execute('UPDATE car SET model = ?, make = ?, color = ?, price = ? WHERE car_id = ?',  
+    [model, make, color, price, car_id]);
+    
+    res.send(result[0])
+})
+
 
 app.listen(PORT, () => {
     console.log(`Express web API running on port: ${PORT}.`)
